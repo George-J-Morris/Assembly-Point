@@ -3,7 +3,6 @@ package main
 import (
 	"blindsig/handlers"
 	"blindsig/internal"
-	"fmt"
 
 	_ "database/sql"
 
@@ -15,9 +14,9 @@ import (
 
 func main() {
 
-	//fmt.Println(internal.GenerateKeyPair())
-	fmt.Println(internal.LoadRsaPublicKey("public.pem"))
-	fmt.Println(internal.LoadRsaPrivateKey("private.pem"))
+	scssPath := "./assets/scss/theme.scss"
+	cssOutPAth := "./assets/css"
+	internal.TranspileBootstrapCss(scssPath, cssOutPAth)
 
 	e := echo.New()
 	e.AutoTLSManager.HostPolicy = autocert.HostWhitelist("assemblypoint.org", "www.assemblypoint.org")
