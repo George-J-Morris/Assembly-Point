@@ -5,9 +5,10 @@
   "main": "./src/index.ts",
   "private": true,
   "scripts": {
-    "build_js": "esbuild --bundle --minify --platform=browser --outfile=./src/index.js ./src/index.ts",
-    "build": "npm run build_js",
-    "test": "npm run build_js && node ./src/index.js"
+    "build_js_browser": "esbuild --bundle --minify --platform=browser --outfile=../release/assets/js/index.js ./src/index.ts",
+    "build_js_node": "esbuild --bundle --platform=node --outfile=./src/index.js ./src/index.ts",
+    "build": "npm run build_js_browser",
+    "test": "npm run build_js_node && node ./src/index.js"
   },
   "author": "",
   "license": "ISC",

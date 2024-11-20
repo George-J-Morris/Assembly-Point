@@ -15,7 +15,7 @@ import (
 
 func main() {
 
-	fmt.Println(internal.GenerateKeyPair())
+	//fmt.Println(internal.GenerateKeyPair())
 	fmt.Println(internal.LoadRsaPublicKey("public.pem"))
 	fmt.Println(internal.LoadRsaPrivateKey("private.pem"))
 

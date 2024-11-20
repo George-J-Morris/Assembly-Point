@@ -6,13 +6,10 @@
 # Modules
 **/node_modules
 
-# Third party
-third_party/dart-sass
-
-# Debugging, Binares, Build Proccess
-**/.vscode
-BlindSig_debug
+# Debugging, IDE config
+.vscode
 release
+*.sh
 
 
 
