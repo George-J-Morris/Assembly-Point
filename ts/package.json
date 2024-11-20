@@ -1,0 +1,23 @@
+{
+  "name": "blindsig-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.ts",
+  "private": true,
+  "scripts": {
+    "build_js": "esbuild --bundle --minify --platform=browser --outfile=./src/index.js ./src/index.ts",
+    "build": "npm run build_js",
+    "test": "npm run build_js && node ./src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@cloudflare/blindrsa-ts": "^0.4.2",
+    "js-base64": "^3.7.7"
+  }
+}

@@ -1,0 +1,16 @@
+# IDE Config
+**/.vscode
+
+# Secret Sauce
+*.env
+*.pem
+**/certs
+
+# Modules
+**/node_modules
+
+# Debug binary
+BlindSig_debug
+
+
+
