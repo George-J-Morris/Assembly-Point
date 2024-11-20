@@ -1,6 +1,3 @@
-# IDE Config
-**/.vscode
-
 # Secret Sauce
 *.env
 *.pem
@@ -12,8 +9,10 @@
 # Third party
 third_party/dart-sass
 
-# Debug binary
+# Debugging, Binares, Build Proccess
+**/.vscode
 BlindSig_debug
+release
 
 
 
