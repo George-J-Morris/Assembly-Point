@@ -9,6 +9,9 @@
 # Modules
 **/node_modules
 
+# Third party
+third_party/dart-sass
+
 # Debug binary
 BlindSig_debug
 
