@@ -3,34 +3,34 @@ package components
 templ Home() {
 	<!DOCTYPE html>
 	<html lang="en">
-		<head>
-			<meta charset="UTF-8"/>
-			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-			<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-			<title>AP</title>
-			<script src="https://unpkg.com/htmx.org@2.0.3"></script>
-            <script src="/assets/js/index.js"></script>
-		</head>
-		<body>
-			<style>
-                div {
-                    padding: 1em;
-                    max-width: 75%;
-                    }
-                .container {
-                    align-items: center;
-                    justify-content: center;
-                    }
-            </style>
-			@Form()
-		</body>
+		@Head()
+        @Body()
 	</html>
+}
+
+templ Head() {
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+		<title>AP</title>
+		<script src="https://unpkg.com/htmx.org@2.0.3"></script>
+		<link href="/assets/css/bootstrap.css" rel="stylesheet"/>
+		<script src="/assets/js/bootstrap.bundle.min.js"></script>
+		<script src="/assets/js/index.js"></script>
+	</head>
+}
+
+templ Body() {
+	<body>
+		@Form()
+	</body>
 }
 
 templ Form() {
 	<div class="container">
 		<div class="item">
-            <script>
+			<script>
                 
             </script>
 			<form hx-post="/api/html/message">
