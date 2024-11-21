@@ -1,5 +1,5 @@
 {
-  "name": "blindsig-ts",
+  "name": "blindsig-frontend",
   "version": "1.0.0",
   "description": "",
   "main": "./src/index.ts",
@@ -15,10 +15,12 @@
   "devDependencies": {
     "@types/node": "^22.9.0",
     "esbuild": "^0.24.0",
+    "purgecss": "^7.0.2",
     "typescript": "^5.6.3"
   },
   "dependencies": {
     "@cloudflare/blindrsa-ts": "^0.4.2",
+    "bootstrap": "^5.3.3",
     "js-base64": "^3.7.7"
   }
 }
