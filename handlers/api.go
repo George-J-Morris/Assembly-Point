@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"blindsig/components"
 	"blindsig/internal"
 	"crypto/rand"
 	"crypto/rsa"
@@ -29,14 +28,6 @@ var jsonError501 = errorJson{
 
 var jsonError500 = errorJson{
 	Error: "Internal Server Error",
-}
-
-// HTML Handlers
-func apiHtmlMessage(c echo.Context) error {
-
-	fmt.Println(c.FormValue("message"))
-
-	return internal.Render(c, http.StatusOK, components.Form())
 }
 
 // JSON Handlers
