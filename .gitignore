@@ -11,5 +11,7 @@
 release
 *.sh
 
+# Bootstrap
+bootstrap.css
 
 
