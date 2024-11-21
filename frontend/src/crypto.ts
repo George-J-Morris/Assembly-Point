@@ -1,4 +1,4 @@
-import { RSABSSA } from "@cloudflare/blindrsa-ts/lib/src/index.js";
+import { RSABSSA } from "@cloudflare/blindrsa-ts";
 import { Base64 } from 'js-base64';
 
 

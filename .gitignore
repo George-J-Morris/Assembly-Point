@@ -11,7 +11,7 @@
 release
 *.sh
 
-# Bootstrap
-bootstrap.css
+# Temporary files
+**/tmp
 
 

@@ -1,13 +1,14 @@
 {
-  "name": "blindsig-frontend",
-  "version": "1.0.0",
+  "name": "build-ap-frontend",
+  "version": "1.1.0",
   "description": "",
-  "main": "./src/index.ts",
+  "main": "./index.js",
+  "type": "module",
   "private": true,
   "scripts": {
     "build_js_browser": "esbuild --bundle --minify --platform=browser --outfile=../release/assets/js/index.js ./src/index.ts",
     "build_js_node": "esbuild --bundle --platform=node --outfile=./src/index.js ./src/index.ts",
-    "build": "npm run build_js_browser",
+    "build": "node index.js",
     "test": "npm run build_js_node && node ./src/index.js"
   },
   "author": "",
@@ -16,7 +17,8 @@
     "@types/node": "^22.9.0",
     "esbuild": "^0.24.0",
     "purgecss": "^7.0.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "sass-embedded": "^1.81.0"
   },
   "dependencies": {
     "@cloudflare/blindrsa-ts": "^0.4.2",
