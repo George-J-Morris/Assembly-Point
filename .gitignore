@@ -6,10 +6,10 @@
 # Modules
 **/node_modules
 
-# Debugging, IDE config
+# Debugging, IDE config, Sloppy bash scripts
 .vscode
 release
-*.sh
+gitrelease.sh
 
 # Temporary files
 **/tmp
