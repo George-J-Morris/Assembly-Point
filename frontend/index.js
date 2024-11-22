@@ -26,7 +26,7 @@ fs.writeFile("./tmp/bootstrap.css", bootstrap.css, function(err) {
 }); 
 
 const bootstrapPurged = await new PurgeCSS().purge({
-    content: ['../views/*.templ'],
+    content: ['../views/*.templ', '../components/*.templ'],
     css: ['./tmp/bootstrap.css'],
   })
 
