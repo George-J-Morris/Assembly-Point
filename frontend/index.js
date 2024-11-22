@@ -28,6 +28,7 @@ fs.writeFile("./tmp/bootstrap.css", bootstrap.css, function (err) {
 const bootstrapPurged = await new PurgeCSS().purge({
     content: ['../views/*.templ', '../components/*.templ'],
     css: ['./tmp/bootstrap.css'],
+    safelist: {deep:[/dropdown/],}
 })
 
 fsP.rm("./tmp", { recursive: true, force: true })
