@@ -1,12 +1,14 @@
 package views
 
+import "blindsig/components"
+
 const title string = "Assembly Point"
 
 templ Home() {
 	<!DOCTYPE html>
 	<html lang="en">
 		@head()
-        @body()
+		@body()
 	</html>
 }
 
@@ -16,15 +18,17 @@ templ head() {
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
 		<title>{ title }</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
 		<script src="https://unpkg.com/htmx.org@2.0.3"></script>
 		<link href="/assets/css/bootstrap.css" rel="stylesheet"/>
 		<script src="/assets/js/bootstrap.bundle.min.js"></script>
+		<script src="/assets/js/jquery-3.7.1.slim.min.js"></script>
 		<script src="/assets/js/index.js"></script>
 	</head>
 }
 
 templ body() {
 	<body>
-    Hello World
+		@components.Header()
 	</body>
 }
