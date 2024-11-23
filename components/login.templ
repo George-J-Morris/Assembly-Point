@@ -1,98 +1,57 @@
 package components
 
 templ logInButton() {
-	<div class="row nav-item dropdown justify-content-center dropdown-center">
+	<div class="row nav-item justify-content-center">
 		<div class="col">
 			<a
 				class="btn btn-outline-light"
 				href="#"
 				id="logInButton"
 				role="button"
-				data-bs-toggle="dropdown"
-				aria-expanded="false"
-				data-bs-auto-close="outside"
-				style="font-size: 1.25rem;"
+				data-bs-toggle="modal"
+				data-bs-target="#exampleModal"
 			>
 				<i class="bi bi-person-badge"></i>
 			</a>
-			@logInForm()
+		</div>
+	</div>
+}
+
+templ LogInModal() {
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				@logInFormHeader()
+				@logInFormBody()
+				@logInFormFooter()
+			</div>
 		</div>
 	</div>
 }
 
 templ logInForm() {
-	<div
-		class="dropdown-menu dropdown-menu-end"
-		id="LogInForm"
-		style="margin-top:25px;padding:10px;width:475%;z-index:1021;"
-	>
-		<div id="Content">
-			//row 1
-			@logInFormHeader()
-			//row 2
-			@logInFormInput()
-			//row 3
-			@logInFormFooter()
-		</div>
-	</div>
 }
 
 templ logInFormHeader() {
-	<div class="row px-2 my-1">
-		<div class="col">
-			<h6 class="dropdown-header px-0">Log In</h6>
-		</div>
-		<div class="col" style="text-align:right;">
-			<button
-				type="button"
-				class="btn-close"
-				onclick="document.getElementById('LogInForm').classList.remove('show');document.getElementById('logInButton').classList.remove('show');"
-				aria-label="Close"
-				style="transform:translate(0px, 5px);box-shadow:none;"
-			></button>
-		</div>
+	<div class="modal-header">
+		<h1 class="modal-title fs-5" id="exampleModalLabel">Log In</h1>
+		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	</div>
 }
 
-templ logInFormInput() {
-	<div class="row px-2 my-1">
-		<div class="col">
-			<div class="dropdown-divider"></div>
-			<form class=" py-0 mb-0 form1" hx-post="/auth" hx-target="#LogInForm" hx-swap="innerHTML">
-				<div class="mb-3">
-					<label for="DropdownUsername" class="form-label">Username</label>
-					<input
-						type="text"
-						class="form-control"
-						id="DropdownUsername"
-						placeholder="Username"
-						name="uname"
-					/>
-				</div>
-				<div class="mb-3">
-					<label for="DropdownPassword" class="form-label">Password</label>
-					<input
-						type="password"
-						class="form-control"
-						id="DropdownPassword"
-						placeholder="Password"
-						name="psw"
-					/>
-				</div>
-				<div class="d-grid col-4 mx-auto">
-					<button type="submit" class="btn btn-primary">Sign in</button>
-				</div>
-			</form>
-		</div>
+templ logInFormBody() {
+	<div class="modal-body">
+		...
 	</div>
 }
 
 templ logInFormFooter() {
 	<div class="row px-2 my-1">
 		<div class="col">
-			<div class="dropdown-divider"></div>
-			<a class="dropdown-item px-2" href="#">New around here? Sign up</a>
-			<a class="dropdown-item px-2" href="#">Forgot password?</a>
+			<ul class="list-group">
+				<li class="list-group-item px-2">New around here? Sign up</li>
+				<li class="list-group-item px-2">Forgot password?</li>
+			</ul>
 		</div>
 	</div>
 }
