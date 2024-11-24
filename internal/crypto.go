@@ -31,12 +31,12 @@ func GenerateKeyPair(outPath string) error {
 		Bytes: privateKey,
 	}
 
-	privOut, _ := os.Create(outPath + "/" + "private.pem")
+	privOut, err := os.Create(outPath + "/" + "private.pem")
 	if err != nil {
 		log.Fatalf("Failed to open private.pem for writing: %v", err)
 	}
 
-	pubOut, _ := os.Create(outPath + "/" + "public.pem")
+	pubOut, err := os.Create(outPath + "/" + "public.pem")
 	if err != nil {
 		log.Fatalf("Failed to open public.pem for writing: %v", err)
 	}
