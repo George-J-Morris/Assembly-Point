@@ -10,7 +10,7 @@ import (
 	"os"
 )
 
-func GenerateKeyPair() error {
+func GenerateKeyPair(outPath string) error {
 	// Server: generate an RSA keypair.
 	sk, err := rsa.GenerateKey(rand.Reader, 2048)
 
@@ -31,19 +31,14 @@ func GenerateKeyPair() error {
 		Bytes: privateKey,
 	}
 
-	os.Create("private.pem")
+	privOut, _ := os.Create(outPath + "/" + "private.pem")
 	if err != nil {
-		log.Fatalf("Failed to open cert.pem for writing: %v", err)
+		log.Fatalf("Failed to open private.pem for writing: %v", err)
 	}
 
-	privOut, _ := os.Create("private.pem")
+	pubOut, _ := os.Create(outPath + "/" + "public.pem")
 	if err != nil {
-		log.Fatalf("Failed to open cert.pem for writing: %v", err)
-	}
-
-	pubOut, _ := os.Create("public.pem")
-	if err != nil {
-		log.Fatalf("Failed to open cert.pem for writing: %v", err)
+		log.Fatalf("Failed to open public.pem for writing: %v", err)
 	}
 
 	pem.Encode(pubOut, pubBlock)
