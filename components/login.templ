@@ -9,7 +9,7 @@ templ logInButton() {
 				id="logInButton"
 				role="button"
 				data-bs-toggle="modal"
-				data-bs-target="#exampleModal"
+				data-bs-target="#logInModal"
 			>
 				<i class="bi bi-person-badge"></i>
 			</a>
@@ -18,8 +18,8 @@ templ logInButton() {
 }
 
 templ LogInModal() {
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
+	<div class="modal fade" id="logInModal" tabindex="-1" aria-labelledby="logInModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm modal-dialog-centered">
 			<div class="modal-content">
 				@logInFormHeader()
 				@logInFormBody()
@@ -29,28 +29,37 @@ templ LogInModal() {
 	</div>
 }
 
-templ logInForm() {
-}
-
 templ logInFormHeader() {
 	<div class="modal-header">
-		<h1 class="modal-title fs-5" id="exampleModalLabel">Log In</h1>
+		<h1 class="modal-title fs-5" id="logInModalLabel">Log In</h1>
 		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	</div>
 }
 
 templ logInFormBody() {
 	<div class="modal-body">
-		...
+		<form class=" py-0 mb-0" hx-post="/auth" hx-target="#logInModal" hx-swap="innerHTML">
+			<div class="mb-3">
+				<label for="exampleDropdownFormEmail1" class="form-label">Username</label>
+				<input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="Username" name="email"/>
+			</div>
+			<div class="mb-3">
+				<label for="exampleDropdownFormPassword1" class="form-label">Password</label>
+				<input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password" name="psw"/>
+			</div>
+			<div class="d-grid col-4 mx-auto">
+				<button type="submit" class="btn btn-primary">Sign in</button>
+			</div>
+		</form>
 	</div>
 }
 
 templ logInFormFooter() {
-	<div class="row px-2 my-1">
+	<div class="modal-footer">
 		<div class="col">
-			<ul class="list-group">
-				<li class="list-group-item px-2">New around here? Sign up</li>
-				<li class="list-group-item px-2">Forgot password?</li>
+			<ul class="list-group list-group-flush">
+				<button type="button" class="list-group-item list-group-item-action"><i class="bi bi-pencil-square pe-3"></i>Sign up</button>
+				<button type="button" class="list-group-item list-group-item-action"><i class="bi bi-question-lg pe-3"></i>Forgot password</button>
 			</ul>
 		</div>
 	</div>

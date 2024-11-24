@@ -2,36 +2,44 @@ package views
 
 import "blindsig/components"
 
-const homeTitle string = "Assembly Point"
+const suTitle string = "Assembly Point"
 
-templ Home() {
+templ SuperUser() {
 	<!DOCTYPE html>
 	<html lang="en">
-		@homeHead()
-		@homeBody()
+		@suHead()
+		@suBody()
 	</html>
 }
 
-templ homeHead() {
+templ suHead() {
 	<head>
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-		<title>{ homeTitle }</title>
+		<title>{ suTitle }</title>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
 		<script src="https://unpkg.com/htmx.org@2.0.3"></script>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-		<script src="/assets/js/index.js"></script>
 	</head>
 }
 
-templ homeBody() {
-	<style>
-    body { padding-top: 70px;}
-    </style>
+templ suBody() {
 	<body>
-		@components.LogInModal()
-		@components.Header()
+		@components.SuHeader()
+		@suLoginCard()
 	</body>
+}
+
+templ suLoginCard() {
+	<div class="container-sm">
+		<div class="d-flex flex-row justify-content-center align-items-center vh-100">
+			<div class="col-md-auto">
+				<div class="card" style="width: 18rem;">
+					@components.SuLogInFormBody()
+				</div>
+			</div>
+		</div>
+	</div>
 }
