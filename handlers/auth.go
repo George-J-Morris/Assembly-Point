@@ -5,7 +5,10 @@ import (
 	"fmt"
 	"strings"
 
+	"net/netip"
+
 	"github.com/labstack/echo/v4"
+	"github.com/mileusna/useragent"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -62,6 +65,17 @@ func htmlLogIn(c echo.Context) error {
 		fmt.Println(passCompare)
 	} else {
 		fmt.Println("Correct Password")
+		userIP := c.Request().Header["Cf-Connecting-Ip"]
+		parsedIp, _ := netip.ParseAddr(userIP[0])
+		userAgent := useragent.Parse(c.Request().UserAgent())
+		userOs := userAgent.OS
+		userBrowser := userAgent.Name
+		fmt.Println(parsedIp.String() + "\n" + userBrowser + "\n" + userOs)
+
+		_, err := db.Exec(c.Request().Context(), "insert into sessions(uuid,ip_address,browser,os) values($1,$2,$3,$4)", thisUser.UUID, parsedIp, userBrowser, userOs)
+		if err != nil {
+			fmt.Println(err)
+		}
 	}
 
 	return nil
