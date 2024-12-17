@@ -18,8 +18,6 @@ func SetupRoutes(app *echo.Echo) {
 
 	// HTML API routing
 	app.GET("/", HomeHandler)
-	app.POST("/su", SAdminHandler)
-	app.POST("/su/auth", SAdminHandler)
 
 	//Testing
 	app.Use(CookieTest)
@@ -32,10 +30,6 @@ func SetupRoutes(app *echo.Echo) {
 
 func HomeHandler(c echo.Context) error {
 	return internal.Render(c, http.StatusOK, views.Home())
-}
-
-func SAdminHandler(c echo.Context) error {
-	return internal.Render(c, http.StatusOK, views.SuperUser())
 }
 
 func RickRoll(c echo.Context) error {
