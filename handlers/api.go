@@ -30,8 +30,6 @@ var jsonError500 = errorJson{
 	Error: "Internal Server Error",
 }
 
-// Super User HTMX Handlers
-
 // JSON Handlers
 func apiJsonPubkey(c echo.Context) error {
 
