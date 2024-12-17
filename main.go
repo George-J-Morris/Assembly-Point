@@ -2,15 +2,16 @@ package main
 
 import (
 	"blindsig/handlers"
-
-	_ "database/sql"
+	"blindsig/internal"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	_ "github.com/lib/pq"
 )
 
 func main() {
+
+	internal.InitDBPool()
+
 	e := echo.New()
 	//e.AutoTLSManager.HostPolicy = autocert.HostWhitelist("assemblypoint.org", "www.assemblypoint.org")
 	// Cache certificates to avoid issues with rate limits (https://letsencrypt.org/docs/rate-limits)
@@ -23,5 +24,8 @@ func main() {
 
 	handlers.SetupRoutes(e)
 
+	// Currently, website is proxied through cloudflare, which does the tls between
+	// cloudflare and the client. This certificate is the origin certificate issued
+	// by cloudflare which covers tls between the origin and cloudflare.
 	e.Logger.Fatal(e.StartTLS(":443", "./certs/cert.pem", "./certs/priv_key.pem"))
 }

@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"blindsig/internal"
-	views "blindsig/views"
+	"blindsig/views"
 
 	"net/http"
 
@@ -18,7 +18,11 @@ func SetupRoutes(app *echo.Echo) {
 
 	// HTML API routing
 	app.GET("/", HomeHandler)
-	app.GET("/superuser", SAdminHandler)
+	app.POST("/su", SAdminHandler)
+	app.POST("/su/auth", SAdminHandler)
+
+	//Testing
+	app.Use(CookieTest)
 
 	// JSON API routing
 	app.GET("/api/json/publickey", apiJsonPubkey)
