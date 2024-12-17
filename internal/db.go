@@ -8,7 +8,7 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-var urlExample1 string = "postgresql://postgres:123@localhost:5432/test?sslmode=disable"
+var urlExample1 string = ""
 
 var database *pgxpool.Pool
 

@@ -16,6 +16,9 @@ func SetupRoutes(app *echo.Echo) {
 	//API group
 	app.Group("/api")
 
+	// Auth HTML API Routing
+	app.POST("/auth", htmlLogIn)
+
 	// HTML API routing
 	app.GET("/", HomeHandler)
 
