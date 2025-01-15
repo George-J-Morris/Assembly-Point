@@ -17,6 +17,8 @@ func main() {
 	// Cache certificates to avoid issues with rate limits (https://letsencrypt.org/docs/rate-limits)
 	//e.AutoTLSManager.Cache = autocert.DirCache("./certs")
 
+	e.IPExtractor = echo.ExtractIPFromXFFHeader()
+
 	e.Use(middleware.Recover())
 	e.Use(middleware.Logger())
 
