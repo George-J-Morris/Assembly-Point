@@ -8,6 +8,7 @@ import (
 	"strings"
 	"time"
 
+	"net/http"
 	"net/netip"
 
 	"github.com/jackc/pgx/v5"
@@ -32,34 +33,9 @@ type Session struct {
 	Expires    time.Time
 }
 
-func CookieTest(next echo.HandlerFunc) echo.HandlerFunc {
-	return func(c echo.Context) error {
-
-		var hasSession bool
-
-		sessionCookie, err := c.Cookie("sessionID")
-
-		if err != nil {
-			fmt.Println(err)
-			hasSession = false
-		} else {
-			hasSession = true
-			db, _ := internal.DB()
-
-			sessionQuery := ""
-			db.Query(c.Request().Context(), sessionQuery)
-
-		}
-
-		fmt.Println(hasSession)
-		fmt.Println(sessionCookie)
-
-		return next(c)
-	}
-}
-
 func getSessions(uuid string) []Session {
 	db, _ := internal.DB()
+
 	rows, _ := db.Query(context.Background(), "SELECT * FROM sessions WHERE uuid = $1", uuid)
 
 	sessions, err := pgx.CollectRows(rows, func(row pgx.CollectableRow) (Session, error) {
@@ -78,11 +54,13 @@ func getSessions(uuid string) []Session {
 
 // HTML Handlers
 func htmlLogIn(c echo.Context) error {
+
 	logInQuery := "SELECT * FROM users WHERE email = $1"
 
 	thisUser := new(UserDB)
 
 	db, _ := internal.DB()
+
 	db.QueryRow(c.Request().Context(), logInQuery, strings.ToLower(c.FormValue("username"))).Scan(&thisUser.UUID, &thisUser.Email, &thisUser.Password, &thisUser.Organisations)
 
 	passCompare := bcrypt.CompareHashAndPassword([]byte(thisUser.Password), []byte(c.FormValue("password")))
@@ -92,11 +70,7 @@ func htmlLogIn(c echo.Context) error {
 	} else {
 		fmt.Println("Correct Password")
 
-		sessions := getSessions(thisUser.UUID)
-
-		for i := range sessions {
-			fmt.Println(sessions[i])
-		}
+		var hasSession bool = false
 
 		userIP := c.Request().Header["Cf-Connecting-Ip"]
 		parsedIp, _ := netip.ParseAddr(userIP[0])
@@ -105,10 +79,40 @@ func htmlLogIn(c echo.Context) error {
 		userBrowser := userAgent.Name
 		fmt.Println(parsedIp.String() + "\n" + userBrowser + "\n" + userOs)
 
-		//_, err := db.Exec(c.Request().Context(), "insert into sessions(uuid,ip_address,browser,os) values($1,$2,$3,$4)", thisUser.UUID, parsedIp, userBrowser, userOs)
-		//if err != nil {
-		//	fmt.Println(err)
-		//}
+	setSession:
+		for !hasSession {
+
+			sessions := getSessions(thisUser.UUID)
+
+			for i := range sessions {
+
+				if !sessions[i].Expires.Before(time.Now()) &&
+					sessions[i].Ip_address.String() == userIP[0] &&
+					sessions[i].Browser == userBrowser && sessions[i].Os == userOs {
+
+					sessionCookie := new(http.Cookie)
+					sessionCookie.Name = "sessionID"
+					sessionCookie.Value = sessions[i].Session_id
+					sessionCookie.Expires = sessions[i].Expires
+					sessionCookie.Secure = true
+					sessionCookie.HttpOnly = true
+					sessionCookie.SameSite = http.SameSiteLaxMode
+					c.SetCookie(sessionCookie)
+
+					hasSession = true
+				}
+			}
+
+			if !hasSession {
+				// Add DB entry for new session
+				//newSession := new(Session)
+				_, err := db.Exec(context.Background(), "insert into sessions(uuid,ip_address,browser,os) values($1,$2,$3,$4)", thisUser.UUID, parsedIp, userBrowser, userOs)
+
+				if err != nil {
+					break setSession
+				}
+			}
+		}
 	}
 
 	return nil
