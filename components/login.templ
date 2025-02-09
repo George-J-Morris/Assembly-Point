@@ -38,7 +38,7 @@ templ logInFormHeader() {
 
 templ logInFormBody() {
 	<div class="modal-body">
-		<form class=" py-0 mb-0" hx-post="/auth" hx-target="#logInModal" hx-swap="innerHTML">
+		<form class=" py-0 mb-0" hx-post="/api/v1/html/auth" hx-target="#logInModal" hx-swap="innerHTML">
 			<div class="mb-3">
 				<label for="exampleDropdownFormEmail1" class="form-label">Username</label>
 				<input type="text" class="form-control" id="exampleDropdownFormEmail1" placeholder="Username" name="username"/>

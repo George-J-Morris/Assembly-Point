@@ -49,7 +49,7 @@ async function getJSON(endpoint: string) {
 
 async function getPublicKey() {
 
-    let pk = await getJSON("/api/json/publickey");
+    let pk = await getJSON("/api/v1/json/publickey");
     return pk
 }
 
@@ -75,7 +75,7 @@ async function main() {
 
     console.log(blindedMsg)
 
-    await postJSON("/api/json/reqBlindSignature", {"blindedMsg":Base64.fromUint8Array(blindedMsg)})
+    await postJSON("/api/v1/json/reqBlindSignature", {"blindedMsg":Base64.fromUint8Array(blindedMsg)})
 
 }
 main();

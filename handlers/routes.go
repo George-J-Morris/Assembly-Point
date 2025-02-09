@@ -13,21 +13,12 @@ func SetupRoutes(app *echo.Echo) {
 	app.GET("/", HomeHandler)
 	app.GET("/.env", RickRoll)
 
-	//API group
-	app.Group("/api")
-
 	// Auth HTML API Routing
-	app.POST("/auth", htmlLogIn)
-
-	// HTML API routing
-	app.GET("/", HomeHandler)
-
-	//Testing
-	app.Use(CookieTest)
+	app.POST("/api/v1/html/auth", htmlLogIn)
 
 	// JSON API routing
-	app.GET("/api/json/publickey", apiJsonPubkey)
-	app.POST("/api/json/reqBlindSignature", apiJsonReqBlindSignature)
+	app.GET("/api/v1/json/publickey", apiJsonPubkey)
+	app.POST("/api/v1/json/reqBlindSignature", apiJsonReqBlindSignature)
 
 }
 
