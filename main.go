@@ -4,6 +4,7 @@ import (
 	"blindsig/handlers"
 	"blindsig/internal"
 
+	_ "github.com/joho/godotenv/autoload"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )

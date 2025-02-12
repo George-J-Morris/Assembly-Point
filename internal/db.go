@@ -2,13 +2,14 @@ package internal
 
 import (
 	"context"
+	"os"
 
 	_ "github.com/jackc/pgerrcode"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-var urlExample1 string = ""
+var urlExample1 string = os.Getenv("POSTGRES_URL")
 
 var database *pgxpool.Pool
 
